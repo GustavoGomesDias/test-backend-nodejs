@@ -12,5 +12,6 @@ module.exports = {
   },
   rules: {
     'no-console': 'off',
+    'import/first': 'off',
   },
 };
