@@ -1,0 +1,29 @@
+{
+  "name": "test-backend-nodejs",
+  "version": "1.0.0",
+  "description": "<h1>Backend Analyst Candidate Testing</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GustavoGomesDias/test-backend-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GustavoGomesDias/test-backend-nodejs/issues"
+  },
+  "homepage": "https://github.com/GustavoGomesDias/test-backend-nodejs#readme",
+  "dependencies": {
+    "dotenv": "npm:undefined@*",
+    "express": "npm:undefined@*",
+    "mongoose": "npm:undefined@*"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "sucrase": "^3.18.1"
+  }
+}
