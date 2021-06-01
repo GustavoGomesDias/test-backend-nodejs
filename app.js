@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 import express from 'express';
 import mongoose from 'mongoose';
+import CategoryModel from './src/models/Category';
+import CategoryRoutes from './src/routes/category';
 
 const app = express();
 
@@ -15,5 +18,7 @@ mongoose.connect(`mongodb://${process.env.DATABASE_URL}:${process.envDATABASE_PO
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
+
+app.use('/', CategoryRoutes);
 
 export default app;
