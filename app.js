@@ -6,7 +6,9 @@ dotenv.config();
 import express from 'express';
 import mongoose from 'mongoose';
 import CategoryModel from './src/models/Category';
+import ProductModel from './src/models/Product';
 import CategoryRoutes from './src/routes/category';
+import ProductRoutes from './src/routes/product';
 
 const app = express();
 
@@ -20,5 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/', CategoryRoutes);
+app.use('/', ProductRoutes);
 
 export default app;
