@@ -9,6 +9,7 @@ import CategoryModel from './src/models/Category';
 import ProductModel from './src/models/Product';
 import CategoryRoutes from './src/routes/category';
 import ProductRoutes from './src/routes/product';
+import ManagerRoutes from './src/routes/manager';
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(express.json());
 
 app.use('/', CategoryRoutes);
 app.use('/', ProductRoutes);
+app.use('/', ManagerRoutes);
 
 export default app;

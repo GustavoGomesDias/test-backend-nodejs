@@ -5,7 +5,7 @@ const ProductModel = mongoose.model('Product');
 class Product {
   async findAll(req, res) {
     try {
-      const products = await ProductModel.find({});
+      const products = await ProductModel.find({}).populate('category');
 
       return res.status(200).json(products);
     } catch (err) {
