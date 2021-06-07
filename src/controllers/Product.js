@@ -32,6 +32,27 @@ class Product {
       return res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
     }
   }
+
+  async editProduct(req, res) {
+    try {
+      const {
+        id, title, description, price,
+      } = req.body;
+
+      await ProductModel.findByIdAndUpdate(id, {
+        $set: {
+          title,
+          description,
+          price,
+        },
+      });
+
+      return res.status(200).json({ message: 'Produto atualizado com sucesso.' });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
+    }
+  }
 }
 
 export default new Product();
