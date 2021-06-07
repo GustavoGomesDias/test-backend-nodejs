@@ -53,6 +53,18 @@ class Product {
       return res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
     }
   }
+
+  async deleteProduct(req, res) {
+    try {
+      const { id } = req.body;
+
+      await ProductModel.findByIdAndDelete(id);
+      return res.status(200).json({ message: 'Produto deletado com sucesso.' });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
+    }
+  }
 }
 
 export default new Product();
