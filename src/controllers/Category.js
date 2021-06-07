@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const CategoryModel = mongoose.model('Category');
+const ProductModel = mongoose.model('Product');
 
 class Category {
   async findAll(req, res) {
@@ -20,6 +21,24 @@ class Category {
 
       await newCategory.save();
 
+      return res.status(200).json({ message: 'Categoria criada com sucesso.' });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
+    }
+  }
+
+  async deleteCategory(req, res) {
+    try {
+      const { id } = req.params;
+
+      await CategoryModel.findByIdAndRemove({
+        _id: id,
+      });
+
+      await ProductModel.updateMany({ category: { $in: id } }, {
+        $pull: { category: id },
+      });
       return res.status(200).json({ message: 'Categoria criada com sucesso.' });
     } catch (err) {
       console.log(err);
