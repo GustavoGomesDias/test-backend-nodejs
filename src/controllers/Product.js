@@ -14,13 +14,9 @@ class Product {
     }
   }
 
-  async findProductByName(req, res) {
+  async findProductsByName(req, res) {
     try {
       const { search } = req.query;
-
-      // const products = await ProductModel.find({
-      //   $text: { $search: search },
-      // }).populate('category');
 
       const products = await ProductModel.find({
         title: {
@@ -28,6 +24,23 @@ class Product {
           $options: 'i',
         },
       }).populate('category');
+
+      return res.status(200).json(products);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
+    }
+  }
+
+  async findProductsByCategory(req, res) {
+    try {
+      const { search } = req.query;
+
+      const products = await ProductModel.find({
+        category: {
+          _id: search,
+        },
+      });
 
       return res.status(200).json(products);
     } catch (err) {

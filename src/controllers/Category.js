@@ -28,6 +28,22 @@ class Category {
     }
   }
 
+  async editCategory(req, res) {
+    try {
+      const { id, title } = req.body;
+
+      await CategoryModel.findByIdAndUpdate(id, {
+        $set: {
+          title,
+        },
+      });
+      return res.status(200).json({ message: 'Categoria atualizado com sucesso.' });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
+    }
+  }
+
   async deleteCategory(req, res) {
     try {
       const { id } = req.params;
