@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import validations from '../validations/validations';
 
 const CategoryModel = mongoose.model('Category');
 const ProductModel = mongoose.model('Product');
@@ -17,7 +18,13 @@ class Category {
 
   async store(req, res) {
     try {
-      const newCategory = new CategoryModel(req.body);
+      const { title } = req.body;
+
+      if (validations.validationField(title)) {
+        return res.status(400).json({ message: 'Informações inválidas.' });
+      }
+
+      const newCategory = new CategoryModel({ title });
 
       await newCategory.save();
 
@@ -32,21 +39,29 @@ class Category {
     try {
       const { id, title } = req.body;
 
+      if (validations.validationField(id) || validations.validationField(title)) {
+        return res.status(400).json({ message: 'Informações inválidas.' });
+      }
+
       await CategoryModel.findByIdAndUpdate(id, {
         $set: {
           title,
         },
       });
-      return res.status(200).json({ message: 'Categoria atualizado com sucesso.' });
+      return res.status(200).json({ message: 'Categoria alterada com sucesso.' });
     } catch (err) {
       console.log(err);
-      return res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
+      res.status(500).json({ message: 'Erro interno, tente novamente mais tarde.' });
     }
   }
 
   async deleteCategory(req, res) {
     try {
       const { id } = req.params;
+
+      if (validations.validationField(id)) {
+        return res.status(400).json({ message: 'Informações inválidas.' });
+      }
 
       await CategoryModel.findByIdAndRemove({
         _id: id,

@@ -15,5 +15,8 @@ module.exports = {
     'import/first': 'off',
     'class-methods-use-this': 'off',
     'no-underscore-dangle': 'off',
+    'consistent-return': 'off',
+    'no-throw-literal': 'off',
+    'no-unreachable': 'off',
   },
 };
